@@ -21,7 +21,22 @@ module.exports = {
       .join("steps as st", "sc.id", "st.scheme_id")
       .orderBy("st.step_number");
   },
-  add(scheme) {},
-  update(changes, id) {},
-  remove(id) {},
+  add(scheme) {
+    return db("schemes")
+      .insert(scheme)
+      .then(([id]) => {
+        return db("schemes").where("id", id).first();
+      });
+  },
+  update(changes, id) {
+    return db("schemes")
+      .where("id", id)
+      .update(changes)
+      .then(() => {
+        return db("schemes").where("id", id).first();
+      });
+  },
+  remove(id) {
+    return db("schemes").where("id", id).del();
+  },
 };

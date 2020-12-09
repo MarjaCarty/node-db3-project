@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
       res.status(201).json(scheme);
     })
     .catch((err) => {
-      res.status(500).json({ message: "Failed to create new scheme" });
+      res.status(500).json({ message: err.message });
     });
 });
 
@@ -102,7 +102,7 @@ router.put("/:id", (req, res) => {
       res.json(updatedScheme);
     })
     .catch((err) => {
-      res.status(500).json({ message: "Failed to update scheme" });
+      res.status(500).json({ message: err.message });
     });
 });
 
